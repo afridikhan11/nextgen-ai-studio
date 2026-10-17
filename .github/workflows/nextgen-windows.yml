@@ -1,0 +1,60 @@
+name: NextGen AI - Windows Installer
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: nextgen-windows
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: windows-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: ".node-version"
+
+      - uses: pnpm/action-setup@v4
+
+      - name: Install
+        run: pnpm install
+
+      - name: Build app
+        run: pnpm run build
+        env:
+          NODE_OPTIONS: --max-old-space-size=8192
+
+      - name: Package Windows installer
+        run: pnpm exec electron-builder --win --x64 --publish never
+        env:
+          ELECTRON_BUILDER_7Z_FILTER: BCJ
+          NODE_OPTIONS: --max-old-space-size=8192
+
+      - name: Upload installer
+        uses: actions/upload-artifact@v4
+        with:
+          name: NextGen-AI-Windows
+          path: |
+            dist/*-setup.exe
+            dist/*-portable.exe
+          retention-days: 30
+
+      - name: Publish GitHub release
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          VERSION=$(node -p "require('./package.json').version")
+          TAG="v${VERSION}-ng.${{ github.run_number }}"
+          gh release create "$TAG" dist/*-setup.exe dist/*-portable.exe \
+            --title "NextGen AI ${VERSION} (build ${{ github.run_number }})" \
+            --notes "NextGen AI — Cherry Studio ${VERSION} par mabni. Setup.exe install karein, ya portable.exe baghair install chalayen."

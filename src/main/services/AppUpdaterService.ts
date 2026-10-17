@@ -4,6 +4,8 @@ import { app, net } from 'electron'
 import type { Logger, NsisUpdater, UpdateCheckResult } from 'electron-updater'
 import { AppUpdater, autoUpdater } from 'electron-updater'
 
+const NEXTGEN_FORK = true
+
 import { application } from '@application'
 import { loggerService } from '@logger'
 import { computeBackoff } from '@main/core/job/runtime/backoff'
@@ -134,9 +136,8 @@ export class AppUpdaterService extends BaseService {
       autoUpdater.autoDownload = false
     })
 
-    // Development builds skip automatic checks but still support manual checks.
-    // Portable builds do not perform update checks.
-    if (!app.isPackaged || this.isPortable()) {
+    // NextGen AI fork: never auto-check, so Cherry Studio builds can't replace this app.
+    if (!app.isPackaged || this.isPortable() || NEXTGEN_FORK) {
       return
     }
     this.scheduleNextUpdateCheck(INITIAL_CHECK_DELAY_MS)
