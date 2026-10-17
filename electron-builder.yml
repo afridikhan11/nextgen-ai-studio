@@ -190,7 +190,6 @@ publish:
   provider: github
   owner: afridikhan11
   repo: nextgen-ai-studio
-  useMultipleRangeRequest: false
 electronDownload:
   mirror: https://npmmirror.com/mirrors/electron/
 beforePack: scripts/packaging/before-pack.js
