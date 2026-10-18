@@ -23,7 +23,6 @@ import {
   isAllowedAgentDevPreviewEntryUrl,
   isAllowedAgentHtmlArtifactEntryUrl
 } from '@main/utils/agentWebviewRequest'
-import { getAppEdition } from '@main/utils/appEdition'
 import { isAllowedHtmlArtifactRequest } from '@main/utils/htmlArtifactRequest'
 import { getWindowsBackgroundMaterial, replaceDevtoolsFont } from '@main/utils/windowUtil'
 import { IpcChannel } from '@shared/IpcChannel'
@@ -517,7 +516,7 @@ export class MainWindowService extends BaseService {
     })
     if (response === 0) {
       await shell.openExternal(
-        getAppEdition() === 'cn' ? 'https://cherryai.com.cn/download' : 'https://cherryai.com/download'
+        'https://github.com/afridikhan11/nextgen-ai-studio/releases'
       )
     }
   }

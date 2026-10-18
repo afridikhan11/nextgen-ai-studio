@@ -70,7 +70,7 @@ interface AnthropicConversation {
  */
 export class AnthropicImporter implements ConversationImporter {
   readonly name = 'Claude'
-  readonly emoji = '🍒'
+  readonly emoji = '🤖'
 
   /**
    * Validate if the file content is a valid Anthropic Claude export

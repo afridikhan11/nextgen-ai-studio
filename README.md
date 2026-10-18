@@ -1,3 +1,5 @@
+> **NextGen AI** — NextGen AI Developers ki modified copy, [Cherry Studio](https://github.com/CherryHQ/cherry-studio) ke open-source code (AGPL-3.0) par mabni. Naam, logo, links aur kuch default settings badli gayi hain; mukammal tabdeeliyan is repo ki commit history mein hain. Ye copy bhi AGPL-3.0 ke tehat hai.
+
 
 <h1 align="center">
   <a href="https://github.com/CherryHQ/cherry-studio/releases">

@@ -4,7 +4,7 @@
     "name": "CherryStudio",
     "version": "2.1.6",
     "description": "A powerful AI assistant for producer.",
-    "homepage": "https://github.com/CherryHQ/cherry-studio"
+    "homepage": "https://github.com/afridikhan11/nextgen-ai-studio"
   },
   "routes": {
     "primary": [

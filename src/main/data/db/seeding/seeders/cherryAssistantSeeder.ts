@@ -13,11 +13,11 @@ import type { DbType, ISeeder } from '../../types'
 // keeping this seed local avoids either direction crossing the Data/AI boundary.
 const CHERRY_ASSISTANT_SEED = {
   name: {
-    default: 'Cherry Assistant',
-    zh: 'Cherry 小助手'
+    default: 'NextGen Assistant',
+    zh: 'NextGen 小助手'
   },
   configuration: {
-    avatar: '🍒',
+    avatar: '🤖',
     permission_mode: 'acceptEdits',
     bootstrap_completed: true,
     builtin_role: 'assistant',

@@ -55,6 +55,8 @@ interface OnboardingPageProps {
 }
 
 const ENABLE_CHERRY_ACCOUNT_LOGIN = false
+// NextGen AI fork: Cherry's own sign-in services are not offered.
+const SHOW_CHERRY_SERVICES = false
 const CHERRYIN_OAUTH_SERVER = 'https://open.cherryin.ai'
 const CHERRYIN_LOGIN_LOADING_TIMEOUT_MS = 10_000
 const PESSIMISTIC_PREFERENCE_OPTIONS = { optimistic: false } as const
@@ -447,6 +449,7 @@ export default function OnboardingPage({
                     <p className="m-0 text-muted-foreground text-sm">{t('onboarding.welcome.subtitle')}</p>
                   </div>
                   <div className="mt-8 flex w-full flex-col gap-3">
+                    {SHOW_CHERRY_SERVICES && (
                     <Button
                       type="button"
                       size="lg"
@@ -463,6 +466,7 @@ export default function OnboardingPage({
                       {!isPrimaryLoginPending && <LogIn size={16} />}
                       {primaryLoginLabel}
                     </Button>
+                    )}
                     {shouldUseCherryAccountLogin && cloudStatus?.phase === 'authorizing' ? (
                       <Button
                         type="button"

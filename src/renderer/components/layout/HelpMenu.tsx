@@ -23,7 +23,7 @@ export function HelpMenu({
   onOverlayOpenChange?: (open: boolean) => void
   placement?: 'right' | 'bottom'
 }) {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
   const { openSmartMiniApp } = useMiniAppPopup()
   const openReleaseNotes = useOpenReleaseNotes()
   const [menuOpen, setMenuOpen] = useState(false)
@@ -58,11 +58,7 @@ export function HelpMenu({
   }
 
   const openDocs = () => {
-    const language = i18n.resolvedLanguage ?? i18n.language
-    const url =
-      language === 'zh-CN' || language === 'zh-TW'
-        ? 'https://docs.cherryai.com.cn/'
-        : 'https://docs.cherryai.com.cn/docs/en-us'
+    const url = 'https://nextgenaidevelopers.com'
     openSmartMiniApp({
       appId: 'cherrystudio-guide',
       name: t('help.guide'),

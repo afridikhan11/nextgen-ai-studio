@@ -11,7 +11,7 @@ import type { DbType, ISeeder } from '../../types'
 
 const CHERRY_SUPPORT_SEED = {
   name: {
-    default: 'Cherry Support',
+    default: 'NextGen Support',
     zh: '产品反馈'
   },
   configuration: {
