@@ -11,6 +11,7 @@ import { LegacyFileCleanupPolicySeeder } from './seeders/legacyFileCleanupPolicy
 import { LocalModelSeeder } from './seeders/LocalModelSeeder'
 import { LongTextPastePreferenceUpgradeSeeder } from './seeders/longTextPastePreferenceUpgradeSeeder'
 import { MiniAppSeeder } from './seeders/miniAppSeeder'
+import { NextgenBrandingSeeder } from './seeders/nextgenBrandingSeeder'
 import { PreferenceSeeder } from './seeders/preferenceSeeder'
 import { PresetProviderSeeder } from './seeders/presetProviderSeeder'
 import { RetiredAgentRuntimeSeeder } from './seeders/RetiredAgentRuntimeSeeder'
@@ -38,6 +39,7 @@ export const seeders: ISeeder[] = [
   new CherryAssistantInstructionsUpgradeSeeder(),
   new CherrySupportSeeder(),
   new DefaultAssistantSeeder(),
+  new NextgenBrandingSeeder(),
   new LongTextPastePreferenceUpgradeSeeder(),
   new WebSearchPreferenceUpgradeSeeder(),
   new SidebarShortcutMigrationSeeder(),

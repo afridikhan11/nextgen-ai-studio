@@ -69,7 +69,11 @@ function getDisplayGroupId(providerId: string) {
   return CHERRYAI_DISPLAY_GROUP.providerIds.some((id) => id === providerId) ? CHERRYAI_DISPLAY_GROUP.id : providerId
 }
 
-function sortProvidersByPriority(providers: Provider[], prioritizedProviderIds: readonly string[]) {
+// NextGen AI fork: Cherry's own hosted providers are not offered.
+const HIDDEN_PROVIDER_IDS = new Set<string>([CHERRYAI_PROVIDER_ID, CHERRY_CLOUD_PROVIDER_ID, 'cherryin'])
+
+function sortProvidersByPriority(allProviders: Provider[], prioritizedProviderIds: readonly string[]) {
+  const providers = allProviders.filter((provider) => !HIDDEN_PROVIDER_IDS.has(provider.id))
   const providerById = new Map(providers.map((provider) => [provider.id, provider]))
   const prioritized = [...new Set([...CHERRYAI_DISPLAY_GROUP.providerIds, ...prioritizedProviderIds])]
     .map((providerId) => providerById.get(providerId))

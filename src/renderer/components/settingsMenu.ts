@@ -24,7 +24,6 @@ import {
   Terminal,
   TextCursorInput,
   ToolCase,
-  UserRound,
   Zap
 } from 'lucide-react'
 import type { ReactNode } from 'react'
@@ -32,7 +31,6 @@ import { createElement } from 'react'
 
 import { GatewayIcon } from '@renderer/components/icons/GatewayIcon'
 import { McpLogo } from '@renderer/components/icons/SvgIcon'
-import { getAppEdition } from '@renderer/utils/appEdition'
 import { isSettingsPath } from '@shared/data/types/settingsPath'
 
 /** Resolve the section label without changing the default settings tab title. */
@@ -61,9 +59,6 @@ export interface SettingsMenuEntry {
  * title searchable — the settings search baseline is structural, not manual.
  */
 export const settingsMenu: readonly SettingsMenuEntry[] = [
-  ...(getAppEdition() === 'global'
-    ? [{ route: '/settings/profile', titleKey: 'settings.profile.title', icon: createElement(UserRound) }]
-    : []),
   { route: '/settings/provider', titleKey: 'settings.provider.title', icon: createElement(Cloud) },
   { route: '/settings/model', titleKey: 'settings.model', icon: createElement(Package) },
   {

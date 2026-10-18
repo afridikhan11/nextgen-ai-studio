@@ -3,19 +3,18 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import useSWR from 'swr'
 
-import { Button, Spinner, Tabs, TabsContent, TabsList, TabsTrigger, Tooltip } from '@cherrystudio/ui'
+import { Button, Spinner, Tabs, TabsContent, TabsList, TabsTrigger } from '@cherrystudio/ui'
 import androidLogo from '@renderer/assets/images/deviceConnections/android.svg'
-import googlePlayLogo from '@renderer/assets/images/deviceConnections/google-play.png'
 import iosLogo from '@renderer/assets/images/deviceConnections/ios.svg'
 import { ipcApi } from '@renderer/ipc'
-import { getAppEdition } from '@renderer/utils/appEdition'
+
+// NextGen AI fork: the Android app comes from our own GitHub releases; no iOS build.
+const NEXTGEN_ANDROID_APK_URL = 'https://github.com/afridikhan11/nextgen-ai-mobile/releases/latest'
 
 export function MobileAppDownload() {
   const { t } = useTranslation()
-  const edition = getAppEdition()
   const [platform, setPlatform] = useState('ios')
   const {
-    data: androidUrl,
     error,
     isValidating,
     mutate
@@ -30,14 +29,14 @@ export function MobileAppDownload() {
       name: 'deviceConnections.download.platform.ios',
       label: 'deviceConnections.download.ios',
       logo: iosLogo,
-      url: 'https://apps.apple.com/app/id6809783714'
+      url: undefined
     },
     {
       platform: 'android',
       name: 'deviceConnections.download.platform.android',
       label: 'deviceConnections.download.android',
       logo: androidLogo,
-      url: androidUrl
+      url: NEXTGEN_ANDROID_APK_URL
     }
   ] as const
 
@@ -77,25 +76,6 @@ export function MobileAppDownload() {
             {platform === 'android' && (
               <div className="flex items-center justify-center gap-2 text-xs text-muted-foreground">
                 <span>{t(url ? 'deviceConnections.download.scanApk' : label)}</span>
-                {edition === 'global' && (
-                  <>
-                    <span aria-hidden="true" className="h-3 border-s border-border" />
-                    <Tooltip content={t('deviceConnections.download.googlePlay')} asChild>
-                      <Button
-                        variant="ghost"
-                        size="icon-sm"
-                        aria-label={t('deviceConnections.download.googlePlay')}
-                        onClick={() =>
-                          void ipcApi.request(
-                            'system.shell.open_external_website',
-                            'https://play.google.com/store/apps/details?id=com.cherryai.cherrystudio_app'
-                          )
-                        }>
-                        <img src={googlePlayLogo} alt="" className="size-4" />
-                      </Button>
-                    </Tooltip>
-                  </>
-                )}
               </div>
             )}
             {platform === 'ios' && url && (
